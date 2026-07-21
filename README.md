@@ -1,36 +1,53 @@
-# Byte Pair Encoding (BPE) Tokenizer
+# Byte Pair Encoding (BPE) and Autoregressive Causal Language Model
 
 ## Overview
 
-This project implements the **Byte Pair Encoding (BPE)** algorithm from scratch using Python. BPE is a subword tokenization technique that builds a vocabulary by repeatedly merging the most frequent adjacent symbol pairs. It is widely used in modern Natural Language Processing (NLP) models to efficiently represent words and handle unknown vocabulary.
+This project demonstrates the implementation of a **Byte Pair Encoding (BPE) Tokenizer** and a simple **Autoregressive Causal Language Model (ARLM)** using Python.
 
-The implementation reads a text corpus, learns merge rules, constructs a subword vocabulary, and provides functionality to encode and decode words using the learned vocabulary.
+The BPE tokenizer learns subword tokens by repeatedly merging the most frequent adjacent symbol pairs. These learned tokens are then used by the autoregressive language model to predict the next token or word in a sequence using previously seen tokens.
+
+This project provides a basic understanding of how modern language models prepare text and generate predictions.
+
+---
 
 ## Features
 
-- Reads text from a corpus file
-- Preprocesses text by converting it to lowercase
-- Splits words into character-level tokens
-- Appends an end-of-word (`</w>`) symbol
-- Counts word and symbol pair frequencies
-- Learns merge rules using the Byte Pair Encoding algorithm
-- Builds a final subword vocabulary
-- Encodes new words into subword tokens
-- Decodes subword tokens back into the original words
-- Displays merge rules, vocabulary, encoded text, decoded text, and vocabulary size
+### Byte Pair Encoding (BPE)
 
+- Reads text from a corpus
+- Preprocesses text
+- Splits words into character-level tokens
+- Counts word frequencies
+- Finds the most frequent adjacent symbol pairs
+- Merges symbol pairs
+- Learns merge rules
+- Builds the final vocabulary
+- Encodes and decodes words
+
+### Autoregressive Causal Language Model
+
+- Uses BPE token IDs as input
+- Creates input-target pairs
+- Learns token embeddings
+- Applies positional encoding
+- Uses causal masking
+- Predicts the next token based only on previous tokens
+- Generates text one token at a time
+
+---
 
 ## Project Structure
 
 ```
-BPE-Tokenizer/
+Byte-Pair-Encoding-and-Autoregressive-LM/
 │── corpus.txt
-│── bpe.py
+│── Byte-Pair Encoding (BPE) and Auto regressive Causal Language Model.ipynb
 │── README.md
 ```
 
+---
 
-## Example Corpus
+## Sample Corpus
 
 ```text
 playing
@@ -44,61 +61,91 @@ replaying
 
 ## Sample Output
 
-```text
+### BPE
+
+```
 Initial Vocabulary
 
-p l a y i n g </w> : 2
-p l a y e d </w> : 1
-p l a y e r </w> : 1
-p l a y f u l </w> : 1
-r e p l a y i n g </w> : 1
+p l a y i n g </w>
+p l a y e d </w>
+p l a y e r </w>
+p l a y f u l </w>
+r e p l a y i n g </w>
 
-Most Frequent Pair: ('p', 'l')
+Most Frequent Pair:
+('p', 'l')
 
-Most Frequent Pair: ('pl', 'a')
+Vocabulary After Merge:
+pl a y i n g </w>
 
-...
-
-Merge Rules
-
+Merge Rules:
 ('p', 'l')
 ('pl', 'a')
 ('pla', 'y')
-
-Final Vocabulary
-
-['</w>', 'play', 'player', 'playing', ...]
-
-Vocabulary Size: 18
-
-Original Word : playing
-Encoded Word  : ['playing</w>']
-Decoded Word  : playing
 ```
 
+### Autoregressive Language Model
+
+```
+Input:
+i love
+
+Predicted Next Word:
+you
+
+Input:
+how are
+
+Predicted Next Word:
+you
+
+Input:
+good morning
+
+Predicted Next Word:
+everyone
+```
+
+---
 
 ## Applications
 
 - Natural Language Processing (NLP)
-- Machine Translation
-- Text Classification
 - Chatbots
-- Search Engines
 - Text Generation
+- Machine Translation
+- Search Engines
+- Auto-complete Systems
 - Large Language Models (LLMs)
+
+---
 
 ## Advantages
 
-- Reduces vocabulary size
+- Reduces vocabulary size using subword tokenization
 - Handles unknown words effectively
-- Learns meaningful subword units
-- Improves tokenization efficiency
-- Minimizes out-of-vocabulary (OOV) issues
+- Improves text representation
+- Generates context-aware predictions
+- Demonstrates the working of modern language models
+
+---
 
 ## Limitations
 
-- Requires a representative training corpus
-- Merge operations can be computationally expensive on large datasets
-- Learned subwords may not always align with linguistic boundaries
+- Prediction quality depends on the training corpus.
+- Small datasets provide limited predictions.
+- This implementation is for educational purposes and is not a full transformer model.
 
+
+## Learning Outcomes
+
+After completing this project, you will understand:
+
+- Byte Pair Encoding (BPE)
+- Subword Tokenization
+- Vocabulary Learning
+- Merge Rules
+- Autoregressive Language Modeling
+- Next Token Prediction
+- Basic Language Model Pipeline
 
